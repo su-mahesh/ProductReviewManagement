@@ -18,5 +18,19 @@ namespace Product_Review_Management
         public string Review{ get; set; }
         public bool IsLike{ get; set; }
 
+        public override bool Equals(object obj)
+        {
+            return obj is ProductReview review &&
+                   ProductID == review.ProductID &&
+                   UserID == review.UserID &&
+                   Rating == review.Rating &&
+                   Review == review.Review &&
+                   IsLike == review.IsLike;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(ProductID, UserID, Rating, Review, IsLike);
+        }
     }
 }

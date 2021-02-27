@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Product_Review_Management
 {
-    class ProductReviewManagement
+    public class ProductReviewManagement
     {
         static void Main()
         {
             Console.WriteLine("Hello World!");
 
-            List<ProductReview> ProductList = new List<ProductReview>()
+            List<ProductReview> ProductReviewsList = new List<ProductReview>()
             {
                 new ProductReview(){ProductID = 1, UserID = 1, Rating = 5, Review = "good", IsLike = true},
                 new ProductReview(){ProductID = 2, UserID = 1, Rating = 5, Review = "good", IsLike = true},
@@ -38,7 +39,7 @@ namespace Product_Review_Management
                 new ProductReview(){ProductID = 25, UserID = 12, Rating = 1, Review = "average", IsLike = true},
             };
 
-            foreach (var product in ProductList)
+            foreach (var product in ProductReviewsList)
             {
                 Console.WriteLine("Product ID".PadRight(10) + ":" + product.ProductID);
                 Console.WriteLine("User ID".PadRight(10) + ":" + product.UserID);
@@ -47,6 +48,11 @@ namespace Product_Review_Management
                 Console.WriteLine("Liked".PadRight(10) + ":" + product.IsLike);
                 Console.WriteLine();
             }
+        }
+
+        public List<ProductReview> RetrieveTop3ProductsByRating(List<ProductReview> productReviewsList)
+        {
+            return productReviewsList.OrderByDescending(product => product.Rating).Take(3).ToList();
         }
     }
 }
