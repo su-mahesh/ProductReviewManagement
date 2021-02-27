@@ -22,7 +22,7 @@ namespace NUnitTestProject
                 new ProductReview(){ProductID = 6, UserID = 3, Rating = 4, Review = "good", IsLike = false},
                 new ProductReview(){ProductID = 7, UserID = 4, Rating = 5, Review = "bad", IsLike = true},
                 new ProductReview(){ProductID = 8, UserID = 4, Rating = 4, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 9, UserID = 5, Rating = 5, Review = "bad", IsLike = false},
+                new ProductReview(){ProductID = 9, UserID = 5, Rating = 2, Review = "bad", IsLike = false},
                 new ProductReview(){ProductID = 10, UserID = 5, Rating = 2.2, Review = "good", IsLike = false},
                 new ProductReview(){ProductID = 11, UserID = 6, Rating = 3, Review = "nice", IsLike = true},
                 new ProductReview(){ProductID = 12, UserID = 6, Rating = 2, Review = "bad", IsLike = true},
@@ -51,6 +51,20 @@ namespace NUnitTestProject
                 new ProductReview(){ProductID = 1, UserID = 1, Rating = 5, Review = "good", IsLike = true},
                 new ProductReview(){ProductID = 2, UserID = 1, Rating = 5, Review = "good", IsLike = true},
                 new ProductReview(){ProductID = 3, UserID = 2, Rating = 5, Review = "good", IsLike = true}
+            };
+            Assert.AreEqual(expected, productsReviewListResult);
+        }
+
+        [Test]
+        public void GivenRatingAndProductIDRange_WhenRetrieveAllFromTheList_ShouldReturnExpected()
+        {
+            int[] ProductIDS = {1, 4, 9 };
+            List<ProductReview> productsReviewListResult = productReviewManagement.RetrieveAllByRatingLimitAndProductIDS(ProductsReviewList, 3d, ProductIDS);
+            var expected = new List<ProductReview>()
+            {
+                new ProductReview(){ProductID = 1, UserID = 1, Rating = 5, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 4, UserID = 2, Rating = 4, Review = "bad", IsLike = false},
+
             };
             Assert.AreEqual(expected, productsReviewListResult);
         }

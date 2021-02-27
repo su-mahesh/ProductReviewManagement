@@ -54,5 +54,11 @@ namespace Product_Review_Management
         {
             return productReviewsList.OrderByDescending(product => product.Rating).Take(3).ToList();
         }
+
+        public List<ProductReview> RetrieveAllByRatingLimitAndProductIDS(List<ProductReview> productReviewsList, double Rating, int[] productIDS)
+        {
+            return productReviewsList.FindAll(product => productIDS.Contains(product.ProductID))
+                .FindAll(product => product.Rating.CompareTo(Rating) >= 0).ToList();
+        }
     }
 }
