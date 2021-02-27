@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product Review Management", "Product Review Management\Product Review Management.csproj", "{623AEA9C-6A59-4ABA-8D28-CF4B6C27100A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTestProject", "NUnitTestProject\NUnitTestProject.csproj", "{53588CC8-8FE0-4B36-926B-3A4C9F18DA0C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{623AEA9C-6A59-4ABA-8D28-CF4B6C27100A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{623AEA9C-6A59-4ABA-8D28-CF4B6C27100A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{623AEA9C-6A59-4ABA-8D28-CF4B6C27100A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{623AEA9C-6A59-4ABA-8D28-CF4B6C27100A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53588CC8-8FE0-4B36-926B-3A4C9F18DA0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53588CC8-8FE0-4B36-926B-3A4C9F18DA0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53588CC8-8FE0-4B36-926B-3A4C9F18DA0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53588CC8-8FE0-4B36-926B-3A4C9F18DA0C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67FD027F-E48A-4E09-8E73-8FB714A1E905}
+	EndGlobalSection
+EndGlobal
