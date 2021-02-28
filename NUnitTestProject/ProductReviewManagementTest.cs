@@ -41,7 +41,7 @@ namespace NUnitTestProject
                 new ProductReview(){ProductID = 21, UserID = 11, Rating = 3, Review = "bad", IsLike = false},
                 new ProductReview(){ProductID = 25, UserID = 12, Rating = 3, Review = "good", IsLike = true},
                 new ProductReview(){ProductID = 25, UserID = 12, Rating = 3, Review = "average", IsLike = true},
-                new ProductReview(){ProductID = 25, UserID = 12, Rating = 4, Review = "average", IsLike = true},
+                new ProductReview(){ProductID = 25, UserID = 12, Rating = 4, Review = "average", IsLike = true}
             };
 
             ProductReviewDataTable = new DataTable();
@@ -87,9 +87,9 @@ namespace NUnitTestProject
             List<ProductReview> productsReviewListResult = productReviewManagement.RetrieveTop3ProductsByRating(ProductsReviewList);
             var expected = new List<ProductReview>()
             {
-                new ProductReview(){ProductID = 1, UserID = 1, Rating = 5, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 1, UserID = 1, Rating = 5, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 3, UserID = 2, Rating = 5, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 10, UserID = 7, Rating = 5, Review = "good", IsLike = false},
+                new ProductReview(){ProductID = 14, UserID = 7, Rating = 5, Review = "nice", IsLike = false},
+                new ProductReview(){ProductID = 15, UserID = 8, Rating = 5, Review = "bad", IsLike = false}
             };
             Assert.AreEqual(expected, productsReviewListResult);
         }
@@ -103,9 +103,7 @@ namespace NUnitTestProject
             List<ProductReview> productsReviewListResult = productReviewManagement.RetrieveAllByRatingLimitAndProductIDS(ProductsReviewList, 3, ProductIDS);
             var expected = new List<ProductReview>()
             {
-                new ProductReview(){ProductID = 1, UserID = 1, Rating = 5, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 1, UserID = 1, Rating = 5, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 4, UserID = 2, Rating = 4, Review = "bad", IsLike = false}
+                new ProductReview(){ProductID = 9, UserID = 5, Rating = 3, Review = "bad", IsLike = false}
             };
             Assert.AreEqual(expected, productsReviewListResult);
         }
@@ -138,27 +136,27 @@ namespace NUnitTestProject
         public void GivenProductReviewsList_WhenRetrieveListSkippingTop5_ShouldReturnExpected()
         {
             var expected = new List<ProductReview>()
-            {               
-                new ProductReview(){ProductID = 5, UserID = 3, Rating = 4, Review = "good", IsLike = false},
-                new ProductReview(){ProductID = 7, UserID = 4, Rating = 5, Review = "bad", IsLike = true},
-                new ProductReview(){ProductID = 7, UserID = 4, Rating = 4, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 9, UserID = 5, Rating = 2, Review = "bad", IsLike = false},
-                new ProductReview(){ProductID = 10, UserID = 5, Rating = 2.2, Review = "good", IsLike = false},
-                new ProductReview(){ProductID = 10, UserID = 6, Rating = 3, Review = "nice", IsLike = true},
-                new ProductReview(){ProductID = 10, UserID = 6, Rating = 2, Review = "bad", IsLike = true},
+            {
+                new ProductReview(){ProductID = 5, UserID = 3, Rating = 2, Review = "good", IsLike = false},
+                new ProductReview(){ProductID = 7, UserID = 4, Rating = 3, Review = "bad", IsLike = true},
+                new ProductReview(){ProductID = 7, UserID = 4, Rating = 3, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 9, UserID = 5, Rating = 3, Review = "bad", IsLike = false},
+                new ProductReview(){ProductID = 10, UserID = 5, Rating = 4, Review = "good", IsLike = false},
+                new ProductReview(){ProductID = 10, UserID = 6, Rating = 4, Review = "nice", IsLike = true},
+                new ProductReview(){ProductID = 10, UserID = 6, Rating = 4, Review = "bad", IsLike = true},
                 new ProductReview(){ProductID = 10, UserID = 7, Rating = 5, Review = "good", IsLike = false},
-                new ProductReview(){ProductID = 14, UserID = 7, Rating = 3.4, Review = "nice", IsLike = false},
+                new ProductReview(){ProductID = 14, UserID = 7, Rating = 5, Review = "nice", IsLike = false},
                 new ProductReview(){ProductID = 15, UserID = 8, Rating = 5, Review = "bad", IsLike = false},
-                new ProductReview(){ProductID = 16, UserID = 8, Rating = 5, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 18, UserID = 9, Rating = 1.2, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 18, UserID = 9, Rating = 0, Review = "very bad", IsLike = false},
-                new ProductReview(){ProductID = 19, UserID = 10, Rating = 0, Review = "bad", IsLike = true},
-                new ProductReview(){ProductID = 20, UserID = 10, Rating = 5, Review = "good", IsLike = false},
-                new ProductReview(){ProductID = 21, UserID = 11, Rating = 0, Review = "average", IsLike = true},
-                new ProductReview(){ProductID = 21, UserID = 11, Rating = 5, Review = "bad", IsLike = false},
-                new ProductReview(){ProductID = 25, UserID = 12, Rating = 1, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 25, UserID = 12, Rating = 1, Review = "average", IsLike = true},
-                new ProductReview(){ProductID = 25, UserID = 12, Rating = 1, Review = "average", IsLike = true},
+                new ProductReview(){ProductID = 16, UserID = 8, Rating = 1, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 18, UserID = 9, Rating = 1, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 18, UserID = 9, Rating = 1, Review = "very bad", IsLike = false},
+                new ProductReview(){ProductID = 19, UserID = 10, Rating = 2, Review = "bad", IsLike = true},
+                new ProductReview(){ProductID = 20, UserID = 10, Rating = 2, Review = "good", IsLike = false},
+                new ProductReview(){ProductID = 21, UserID = 11, Rating = 2, Review = "average", IsLike = true},
+                new ProductReview(){ProductID = 21, UserID = 11, Rating = 3, Review = "bad", IsLike = false},
+                new ProductReview(){ProductID = 25, UserID = 12, Rating = 3, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 25, UserID = 12, Rating = 3, Review = "average", IsLike = true},
+                new ProductReview(){ProductID = 25, UserID = 12, Rating = 4, Review = "average", IsLike = true}
             };
             List<ProductReview> ProductReviewList = productReviewManagement.RetrieveProductReviewSkippingTop5(ProductsReviewList);            
             Assert.AreEqual(expected, ProductReviewList);
@@ -188,8 +186,16 @@ namespace NUnitTestProject
         public void GivenProductReviewsList_WhenRetrieveAverageRatingForEachProduct_ShouldReturnExpeted()
         {
             Dictionary<int, double> ProductAvgRating = productReviewManagement.RetrieveAverageRatingOfEachProduct(ProductsReviewList);
-
             Assert.AreEqual(3.3333333333333335, ProductAvgRating[25]);
+        }
+        /// <summary>
+        /// Givens the product reviews list when retrieve all records with review nice should return expeted.
+        /// </summary>
+        [Test]
+        public void GivenProductReviewsList_WhenRetrieveAllRecordsWithReviewNice_ShouldReturnExpeted()
+        {
+            List<ProductReview> ProductReviews = productReviewManagement.RetrieveAllProductReviewsHavingReviewNice(ProductsReviewList);
+            Assert.AreEqual(ProductsReviewList[10], ProductReviews[0]);
         }
     }
 }

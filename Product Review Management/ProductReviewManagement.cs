@@ -158,5 +158,14 @@ namespace Product_Review_Management
         {
            return productsReviewList.GroupBy(product => product.ProductID).ToDictionary(p => p.Key, p => p.Average(p => p.Rating));
         }
+        /// <summary>
+        /// Retrieves all product reviews having review nice.
+        /// </summary>
+        /// <param name="productsReviewList">The products review list.</param>
+        /// <returns></returns>S
+        public List<ProductReview> RetrieveAllProductReviewsHavingReviewNice(List<ProductReview> productsReviewList)
+        {
+            return productsReviewList.FindAll(product => product.Review.Equals("nice", StringComparison.OrdinalIgnoreCase));
+        }
     }
 }
