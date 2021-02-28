@@ -60,5 +60,13 @@ namespace Product_Review_Management
             return productReviewsList.FindAll(product => productIDS.Contains(product.ProductID))
                 .FindAll(product => product.Rating.CompareTo(Rating) >= 0).ToList();
         }
+
+        public Dictionary<int, int> RetrieveReviewCountForEachProductID(List<ProductReview> productsReviewList)
+        {
+
+            var s = productsReviewList.GroupBy(product => product.ProductID).ToDictionary(x => x.Key, x => x.Count()); //Select(p => new { productID = p.Key, Count = p.Count()});
+                                                                                                                       //ToDictionary(x => x.Key, x => x.Count()); 
+            return s;
+        }
     }
 }
