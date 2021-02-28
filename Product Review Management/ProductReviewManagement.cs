@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Product_Review_Management
@@ -90,10 +91,29 @@ namespace Product_Review_Management
             var p = productsReviewList.Select(product => new { ProductID = product.ProductID, Review = product.Review }).ToList();
             return p;
         }
-
         public List<ProductReview> RetrieveProductReviewSkippingTop5(List<ProductReview> productsReviewList)
         {
             return productsReviewList.Skip(5).ToList();
+        }
+
+        public System.Data.DataTable CreateDataTableOfProductReview(List<ProductReview> productsReviewList)
+        {
+            DataTable ProductReviewDataTable = new DataTable();
+            ProductReviewDataTable.Columns.Add("ProductID");
+            ProductReviewDataTable.Columns.Add("UserID");
+            ProductReviewDataTable.Columns.Add("Rating");
+            ProductReviewDataTable.Columns.Add("Review");
+            ProductReviewDataTable.Columns.Add("IsLike");
+
+            productsReviewList.ForEach(product => { ProductReviewDataTable.Rows.Add(product.ProductID);
+                ProductReviewDataTable.Rows.Add(product.ProductID);
+                ProductReviewDataTable.Rows.Add(product.UserID);
+                ProductReviewDataTable.Rows.Add(product.Rating);
+                ProductReviewDataTable.Rows.Add(product.Review);
+                ProductReviewDataTable.Rows.Add(product.IsLike);
+            });
+
+            return ProductReviewDataTable;
         }
     }
 }

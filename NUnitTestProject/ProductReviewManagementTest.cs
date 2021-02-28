@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Data;
 using NUnit.Framework;
 using Product_Review_Management;
 
@@ -8,38 +10,73 @@ namespace NUnitTestProject
     {
         List<ProductReview> ProductsReviewList;
         ProductReviewManagement productReviewManagement;
+        DataTable dataTable;
         [SetUp]
         public void Setup()
         {
             productReviewManagement = new ProductReviewManagement();
             ProductsReviewList = new List<ProductReview>()
             {
-                new ProductReview(){ProductID = 1, UserID = 1, Rating = 5, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 1, UserID = 1, Rating = 5, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 3, UserID = 2, Rating = 5, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 4, UserID = 2, Rating = 4, Review = "bad", IsLike = false},
-                new ProductReview(){ProductID = 5, UserID = 3, Rating = 1.3, Review = "bad", IsLike = true},
-                new ProductReview(){ProductID = 5, UserID = 3, Rating = 4, Review = "good", IsLike = false},
-                new ProductReview(){ProductID = 7, UserID = 4, Rating = 5, Review = "bad", IsLike = true},
-                new ProductReview(){ProductID = 7, UserID = 4, Rating = 4, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 9, UserID = 5, Rating = 2, Review = "bad", IsLike = false},
-                new ProductReview(){ProductID = 10, UserID = 5, Rating = 2.2, Review = "good", IsLike = false},
-                new ProductReview(){ProductID = 10, UserID = 6, Rating = 3, Review = "nice", IsLike = true},
-                new ProductReview(){ProductID = 10, UserID = 6, Rating = 2, Review = "bad", IsLike = true},
+                new ProductReview(){ProductID = 1, UserID = 1, Rating = 1, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 1, UserID = 1, Rating = 1, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 3, UserID = 2, Rating = 1, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 4, UserID = 2, Rating = 2, Review = "bad", IsLike = false},
+                new ProductReview(){ProductID = 5, UserID = 3, Rating = 2, Review = "bad", IsLike = true},
+                new ProductReview(){ProductID = 5, UserID = 3, Rating = 2, Review = "good", IsLike = false},
+                new ProductReview(){ProductID = 7, UserID = 4, Rating = 3, Review = "bad", IsLike = true},
+                new ProductReview(){ProductID = 7, UserID = 4, Rating = 3, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 9, UserID = 5, Rating = 3, Review = "bad", IsLike = false},
+                new ProductReview(){ProductID = 10, UserID = 5, Rating = 4, Review = "good", IsLike = false},
+                new ProductReview(){ProductID = 10, UserID = 6, Rating = 4, Review = "nice", IsLike = true},
+                new ProductReview(){ProductID = 10, UserID = 6, Rating = 4, Review = "bad", IsLike = true},
                 new ProductReview(){ProductID = 10, UserID = 7, Rating = 5, Review = "good", IsLike = false},
-                new ProductReview(){ProductID = 14, UserID = 7, Rating = 3.4, Review = "nice", IsLike = false},
+                new ProductReview(){ProductID = 14, UserID = 7, Rating = 5, Review = "nice", IsLike = false},
                 new ProductReview(){ProductID = 15, UserID = 8, Rating = 5, Review = "bad", IsLike = false},
-                new ProductReview(){ProductID = 16, UserID = 8, Rating = 5, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 18, UserID = 9, Rating = 1.2, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 18, UserID = 9, Rating = 0, Review = "very bad", IsLike = false},
-                new ProductReview(){ProductID = 19, UserID = 10, Rating = 0, Review = "bad", IsLike = true},
-                new ProductReview(){ProductID = 20, UserID = 10, Rating = 5, Review = "good", IsLike = false},
-                new ProductReview(){ProductID = 21, UserID = 11, Rating = 0, Review = "average", IsLike = true},
-                new ProductReview(){ProductID = 21, UserID = 11, Rating = 5, Review = "bad", IsLike = false},
-                new ProductReview(){ProductID = 25, UserID = 12, Rating = 1, Review = "good", IsLike = true},
-                new ProductReview(){ProductID = 25, UserID = 12, Rating = 1, Review = "average", IsLike = true},
-                new ProductReview(){ProductID = 25, UserID = 12, Rating = 1, Review = "average", IsLike = true},
+                new ProductReview(){ProductID = 16, UserID = 8, Rating = 1, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 18, UserID = 9, Rating = 1, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 18, UserID = 9, Rating = 1, Review = "very bad", IsLike = false},
+                new ProductReview(){ProductID = 19, UserID = 10, Rating = 2, Review = "bad", IsLike = true},
+                new ProductReview(){ProductID = 20, UserID = 10, Rating = 2, Review = "good", IsLike = false},
+                new ProductReview(){ProductID = 21, UserID = 11, Rating = 2, Review = "average", IsLike = true},
+                new ProductReview(){ProductID = 21, UserID = 11, Rating = 3, Review = "bad", IsLike = false},
+                new ProductReview(){ProductID = 25, UserID = 12, Rating = 3, Review = "good", IsLike = true},
+                new ProductReview(){ProductID = 25, UserID = 12, Rating = 3, Review = "average", IsLike = true},
+                new ProductReview(){ProductID = 25, UserID = 12, Rating = 4, Review = "average", IsLike = true},
             };
+
+             dataTable = new DataTable();
+            dataTable.Columns.Add("ProductID");
+            dataTable.Columns.Add("UserID");
+            dataTable.Columns.Add("Rating");
+            dataTable.Columns.Add("Review");
+            dataTable.Columns.Add("IsLike");
+
+            dataTable.Rows.Add(1, 1, 1, "good", true);
+            dataTable.Rows.Add(2, 1, 1, "good", true);
+            dataTable.Rows.Add(3, 2, 1, "good", true);
+            dataTable.Rows.Add(4, 2, 2, "bad", true);
+            dataTable.Rows.Add(5, 3, 2, "bad", true);
+            dataTable.Rows.Add(6, 3, 2, "good", true);
+            dataTable.Rows.Add(7, 4, 3, "bad", true);
+            dataTable.Rows.Add(8, 4, 3, "good", true);
+            dataTable.Rows.Add(9, 5, 3, "bad", true);
+            dataTable.Rows.Add(10, 5, 4, "nice", true);
+            dataTable.Rows.Add(11, 6, 4, "bad", true);
+            dataTable.Rows.Add(12, 6, 4, "good", true);
+            dataTable.Rows.Add(13, 7, 5, "nice", true);
+            dataTable.Rows.Add(14, 7, 5, "bad", true);
+            dataTable.Rows.Add(15, 8, 5, "good", true);
+            dataTable.Rows.Add(16, 8, 1, "good", true);
+            dataTable.Rows.Add(17, 9, 1, "very bad", true);
+            dataTable.Rows.Add(18, 9, 1, "bad", true);
+            dataTable.Rows.Add(19, 10, 2, "good", true);
+            dataTable.Rows.Add(20, 10, 2, "average", true);
+            dataTable.Rows.Add(21, 11, 2, "bad", true);
+            dataTable.Rows.Add(22, 11, 3, "good", true);
+            dataTable.Rows.Add(23, 12, 3, "good", true);
+            dataTable.Rows.Add(24, 12, 3, "average", true);
+            dataTable.Rows.Add(25, 12, 4, "average", true);
+
         }
         /// <summary>
         /// Retrievings the top3 records from the list should return expeted.
@@ -119,6 +156,12 @@ namespace NUnitTestProject
             };
             List<ProductReview> ProductReviewList = productReviewManagement.RetrieveProductReviewSkippingTop5(ProductsReviewList);            
             Assert.AreEqual(expected, ProductReviewList);
+        }
+        [Test]
+        public void GivenProductReviewsList_WhenCreatedDataTable_ShouldReturnExpeted()
+        {
+            DataTable productsReviewDataTable = productReviewManagement.CreateDataTableOfProductReview(ProductsReviewList);
+            Assert.AreEqual(dataTable.Columns[0].ColumnName, productsReviewDataTable.Columns[0].ColumnName);
         }
     }
 }
