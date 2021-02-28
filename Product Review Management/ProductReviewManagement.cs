@@ -8,6 +8,9 @@ namespace Product_Review_Management
     public class ProductReviewManagement
     {
         readonly List<ProductReview> ProductReviewsList;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProductReviewManagement"/> class.
+        /// </summary>
         public ProductReviewManagement()
         {
             ProductReviewsList = new List<ProductReview>()
@@ -54,11 +57,7 @@ namespace Product_Review_Management
 
         static void Main()
         {
-            Console.WriteLine("Hello World!");
-
-            
-
-            
+            Console.WriteLine("Hello World!");           
         }
         /// <summary>
         /// Retrieves the top3 products by rating.
@@ -105,7 +104,11 @@ namespace Product_Review_Management
         {
             return productsReviewList.Skip(5).ToList();
         }
-
+        /// <summary>
+        /// Creates the data table of product review.
+        /// </summary>
+        /// <param name="productsReviewList">The products review list.</param>
+        /// <returns></returns>
         public System.Data.DataTable CreateDataTableOfProductReview(List<ProductReview> productsReviewList)
         {
             DataTable ProductReviewDataTable = new DataTable();
@@ -125,7 +128,11 @@ namespace Product_Review_Management
 
             return ProductReviewDataTable;
         }
-
+        /// <summary>
+        /// Retrieves the record with likes.
+        /// </summary>
+        /// <param name="productReviewDataTable">The product review data table.</param>
+        /// <returns></returns>
         public DataTable RetrieveRecordWithLikes(DataTable productReviewDataTable)
         {
             DataTable dataTable = new DataTable();
@@ -141,6 +148,15 @@ namespace Product_Review_Management
                     Console.WriteLine(row[column]);
                 }
             }
+        }
+        /// <summary>
+        /// Retrieves the average rating of each product.
+        /// </summary>
+        /// <param name="productsReviewList">The products review list.</param>
+        /// <returns></returns>
+        public Dictionary<int, double> RetrieveAverageRatingOfEachProduct(List<ProductReview> productsReviewList)
+        {
+           return productsReviewList.GroupBy(product => product.ProductID).ToDictionary(p => p.Key, p => p.Average(p => p.Rating));
         }
     }
 }

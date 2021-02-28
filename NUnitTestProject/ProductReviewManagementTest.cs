@@ -44,7 +44,7 @@ namespace NUnitTestProject
                 new ProductReview(){ProductID = 25, UserID = 12, Rating = 4, Review = "average", IsLike = true},
             };
 
-             ProductReviewDataTable = new DataTable();
+            ProductReviewDataTable = new DataTable();
             ProductReviewDataTable.Columns.Add("ProductID", typeof(int));
             ProductReviewDataTable.Columns.Add("UserID", typeof(int));
             ProductReviewDataTable.Columns.Add("Rating", typeof(double));
@@ -122,12 +122,18 @@ namespace NUnitTestProject
             };
             Assert.AreEqual(expected, ProductIDReviewCount);
         }
+        /// <summary>
+        /// Givens the product reviews list when retrieve only product identifier and review should return expected.
+        /// </summary>
         [Test]
         public void GivenProductReviewsList_WhenRetrieveOnlyProductIDAndReview_ShouldReturnExpected()
         {
             var ProductIDAndReview = productReviewManagement.RetrieveProductIDAndReview(ProductsReviewList);            
             Assert.IsNotNull(ProductIDAndReview);
         }
+        /// <summary>
+        /// Givens the product reviews list when retrieve list skipping top5 should return expected.
+        /// </summary>
         [Test]
         public void GivenProductReviewsList_WhenRetrieveListSkippingTop5_ShouldReturnExpected()
         {
@@ -157,19 +163,33 @@ namespace NUnitTestProject
             List<ProductReview> ProductReviewList = productReviewManagement.RetrieveProductReviewSkippingTop5(ProductsReviewList);            
             Assert.AreEqual(expected, ProductReviewList);
         }
+        /// <summary>
+        /// Givens the product reviews list when created data table should return expeted.
+        /// </summary>
         [Test]
         public void GivenProductReviewsList_WhenCreatedDataTable_ShouldReturnExpeted()
         {
             DataTable productsReviewDataTable = productReviewManagement.CreateDataTableOfProductReview(ProductsReviewList);
             Assert.AreEqual(ProductReviewDataTable.Columns[0].ColumnName, productsReviewDataTable.Columns[0].ColumnName);
         }
-
+        /// <summary>
+        /// Givens the product reviews table when retrieve record having is like true should return expeted.
+        /// </summary>
         [Test]
         public void GivenProductReviewsTable_WhenRetrieveRecordHavingIsLikeTrue_ShouldReturnExpeted()
         {
             DataTable dataTable = productReviewManagement.RetrieveRecordWithLikes(ProductReviewDataTable);
-            bool result = (bool)dataTable.Rows[2]["IsLike"];
-            Assert.IsTrue(result);
+            Assert.AreEqual(ProductReviewDataTable.Rows[0][1], dataTable.Rows[0][1]);
+        }
+        /// <summary>
+        /// Givens the product reviews list when retrieve average rating for each product should return expeted.
+        /// </summary>
+        [Test]
+        public void GivenProductReviewsList_WhenRetrieveAverageRatingForEachProduct_ShouldReturnExpeted()
+        {
+            Dictionary<int, double> ProductAvgRating = productReviewManagement.RetrieveAverageRatingOfEachProduct(ProductsReviewList);
+
+            Assert.AreEqual(3.3333333333333335, ProductAvgRating[25]);
         }
     }
 }
