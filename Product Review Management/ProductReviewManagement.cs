@@ -167,8 +167,13 @@ namespace Product_Review_Management
         {
             return productsReviewList.FindAll(product => product.Review.Equals("nice", StringComparison.OrdinalIgnoreCase));
         }
-
-        public List<ProductReview> RetrieveAllProductReviewsByUserIDAndOrderByRating(List<ProductReview> productsReviewList, int userID)
+        /// <summary>
+        /// Retrieves all product reviews by user identifier and order by rating.
+        /// </summary>
+        /// <param name="productsReviewList">The products review list.</param>
+        /// <param name="userID">The user identifier.</param>
+        /// <returns></returns>
+        public List<ProductReview> RetrieveAllProductReviews_ByUserIDAndOrderByRating(List<ProductReview> productsReviewList, int userID)
         {
             return productsReviewList.FindAll(product => product.UserID.Equals(userID)).OrderBy(product => product.Rating).ToList();
         }
