@@ -90,5 +90,10 @@ namespace Product_Review_Management
             var p = productsReviewList.Select(product => new { ProductID = product.ProductID, Review = product.Review }).ToList();
             return p;
         }
+
+        public List<ProductReview> RetrieveProductReviewSkippingTop5(List<ProductReview> productsReviewList)
+        {
+            return productsReviewList.Skip(5).ToList();
+        }
     }
 }
