@@ -41,7 +41,9 @@ namespace NUnitTestProject
                 new ProductReview(){ProductID = 25, UserID = 12, Rating = 1, Review = "average", IsLike = true},
             };
         }
-
+        /// <summary>
+        /// Retrievings the top3 records from the list should return expeted.
+        /// </summary>
         [Test]
         public void RetrievingTop3RecordsFromTheList_ShouldReturnExpeted()
         {
@@ -54,7 +56,9 @@ namespace NUnitTestProject
             };
             Assert.AreEqual(expected, productsReviewListResult);
         }
-
+        /// <summary>
+        /// Givens the rating and product identifier range when retrieve all from the list should return expected.
+        /// </summary>
         [Test]
         public void GivenRatingAndProductIDRange_WhenRetrieveAllFromTheList_ShouldReturnExpected()
         {
@@ -68,30 +72,24 @@ namespace NUnitTestProject
             };
             Assert.AreEqual(expected, productsReviewListResult);
         }
-
+        /// <summary>
+        /// Givens the product reviews list when retrieve count of review for each product should return expected.
+        /// </summary>
         [Test]
         public void GivenProductReviewsList_WhenRetrieveCountOfReviewForEachProduct_ShouldReturnExpected()
         {
             Dictionary<int, int> ProductIDReviewCount = productReviewManagement.RetrieveReviewCountForEachProductID(ProductsReviewList);
             var expected = new Dictionary<int, int>()
             {
-                {1, 2},
-                {3, 1},
-                {4, 1},
-                {5, 2},
-                {7, 2},
-                {9, 1},
-                {10, 4},
-                {14, 1},
-                {15, 1},
-                {16, 1},
-                {18, 2},
-                {19, 1},
-                {20, 1},
-                {21, 2},
-                {25, 3}
+                {1, 2}, {3, 1}, {4, 1}, {5, 2}, {7, 2}, {9, 1}, {10, 4}, {14, 1}, {15, 1}, {16, 1}, {18, 2}, {19, 1}, {20, 1}, {21, 2}, {25, 3}
             };
             Assert.AreEqual(expected, ProductIDReviewCount);
+        }
+        [Test]
+        public void GivenProductReviewsList_WhenRetrieveOnlyProductIDAndReview_ShouldReturnExpected()
+        {
+            var ProductIDAndReview = productReviewManagement.RetrieveProductIDAndReview(ProductsReviewList);            
+            Assert.IsNotNull(ProductIDAndReview);
         }
     }
 }

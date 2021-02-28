@@ -49,24 +49,46 @@ namespace Product_Review_Management
                 Console.WriteLine();
             }
         }
-
+        /// <summary>
+        /// Retrieves the top3 products by rating.
+        /// </summary>
+        /// <param name="productReviewsList">The product reviews list.</param>
+        /// <returns></returns>
         public List<ProductReview> RetrieveTop3ProductsByRating(List<ProductReview> productReviewsList)
         {
             return productReviewsList.OrderByDescending(product => product.Rating).Take(3).ToList();
         }
-
+        /// <summary>
+        /// Retrieves all by rating limit and product ids.
+        /// </summary>
+        /// <param name="productReviewsList">The product reviews list.</param>
+        /// <param name="Rating">The rating.</param>
+        /// <param name="productIDS">The product ids.</param>
+        /// <returns></returns>
         public List<ProductReview> RetrieveAllByRatingLimitAndProductIDS(List<ProductReview> productReviewsList, double Rating, int[] productIDS)
         {
             return productReviewsList.FindAll(product => productIDS.Contains(product.ProductID))
                 .FindAll(product => product.Rating.CompareTo(Rating) >= 0).ToList();
         }
-
+        /// <summary>
+        /// Retrieves the review count for each product identifier.
+        /// </summary>
+        /// <param name="productsReviewList">The products review list.</param>
+        /// <returns></returns>
         public Dictionary<int, int> RetrieveReviewCountForEachProductID(List<ProductReview> productsReviewList)
         {
-
-            var s = productsReviewList.GroupBy(product => product.ProductID).ToDictionary(x => x.Key, x => x.Count()); //Select(p => new { productID = p.Key, Count = p.Count()});
-                                                                                                                       //ToDictionary(x => x.Key, x => x.Count()); 
-            return s;
+            return productsReviewList.GroupBy(product => product.ProductID).ToDictionary(p => p.Key, p => p.Count());
+        }
+        /// <summary>
+        /// Retrieves the product identifier and review.
+        /// </summary>
+        /// <param name="productsReviewList">The products review list.</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public object RetrieveProductIDAndReview(List<ProductReview> productsReviewList)
+        {
+            var p = productsReviewList.Select(product => new { ProductID = product.ProductID, Review = product.Review }).ToList();
+            return p;
         }
     }
 }
