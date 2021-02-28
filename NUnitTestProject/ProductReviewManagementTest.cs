@@ -10,7 +10,7 @@ namespace NUnitTestProject
     {
         List<ProductReview> ProductsReviewList;
         ProductReviewManagement productReviewManagement;
-        DataTable dataTable;
+        DataTable ProductReviewDataTable;
         [SetUp]
         public void Setup()
         {
@@ -44,38 +44,38 @@ namespace NUnitTestProject
                 new ProductReview(){ProductID = 25, UserID = 12, Rating = 4, Review = "average", IsLike = true},
             };
 
-             dataTable = new DataTable();
-            dataTable.Columns.Add("ProductID");
-            dataTable.Columns.Add("UserID");
-            dataTable.Columns.Add("Rating");
-            dataTable.Columns.Add("Review");
-            dataTable.Columns.Add("IsLike");
+             ProductReviewDataTable = new DataTable();
+            ProductReviewDataTable.Columns.Add("ProductID", typeof(int));
+            ProductReviewDataTable.Columns.Add("UserID", typeof(int));
+            ProductReviewDataTable.Columns.Add("Rating", typeof(double));
+            ProductReviewDataTable.Columns.Add("Review", typeof(string));
+            ProductReviewDataTable.Columns.Add("IsLike", typeof(bool));
 
-            dataTable.Rows.Add(1, 1, 1, "good", true);
-            dataTable.Rows.Add(2, 1, 1, "good", true);
-            dataTable.Rows.Add(3, 2, 1, "good", true);
-            dataTable.Rows.Add(4, 2, 2, "bad", true);
-            dataTable.Rows.Add(5, 3, 2, "bad", true);
-            dataTable.Rows.Add(6, 3, 2, "good", true);
-            dataTable.Rows.Add(7, 4, 3, "bad", true);
-            dataTable.Rows.Add(8, 4, 3, "good", true);
-            dataTable.Rows.Add(9, 5, 3, "bad", true);
-            dataTable.Rows.Add(10, 5, 4, "nice", true);
-            dataTable.Rows.Add(11, 6, 4, "bad", true);
-            dataTable.Rows.Add(12, 6, 4, "good", true);
-            dataTable.Rows.Add(13, 7, 5, "nice", true);
-            dataTable.Rows.Add(14, 7, 5, "bad", true);
-            dataTable.Rows.Add(15, 8, 5, "good", true);
-            dataTable.Rows.Add(16, 8, 1, "good", true);
-            dataTable.Rows.Add(17, 9, 1, "very bad", true);
-            dataTable.Rows.Add(18, 9, 1, "bad", true);
-            dataTable.Rows.Add(19, 10, 2, "good", true);
-            dataTable.Rows.Add(20, 10, 2, "average", true);
-            dataTable.Rows.Add(21, 11, 2, "bad", true);
-            dataTable.Rows.Add(22, 11, 3, "good", true);
-            dataTable.Rows.Add(23, 12, 3, "good", true);
-            dataTable.Rows.Add(24, 12, 3, "average", true);
-            dataTable.Rows.Add(25, 12, 4, "average", true);
+            ProductReviewDataTable.Rows.Add(1, 1, 1, "good", true);
+            ProductReviewDataTable.Rows.Add(2, 1, 1, "good", true);
+            ProductReviewDataTable.Rows.Add(3, 2, 1, "good", true);
+            ProductReviewDataTable.Rows.Add(4, 2, 2, "bad", true);
+            ProductReviewDataTable.Rows.Add(5, 3, 2, "bad", true);
+            ProductReviewDataTable.Rows.Add(6, 3, 2, "good", true);
+            ProductReviewDataTable.Rows.Add(7, 4, 3, "bad", true);
+            ProductReviewDataTable.Rows.Add(8, 4, 3, "good", true);
+            ProductReviewDataTable.Rows.Add(9, 5, 3, "bad", true);
+            ProductReviewDataTable.Rows.Add(10, 5, 4, "nice", true);
+            ProductReviewDataTable.Rows.Add(11, 6, 4, "bad", true);
+            ProductReviewDataTable.Rows.Add(12, 6, 4, "good", true);
+            ProductReviewDataTable.Rows.Add(13, 7, 5, "nice", true);
+            ProductReviewDataTable.Rows.Add(14, 7, 5, "bad", true);
+            ProductReviewDataTable.Rows.Add(15, 8, 5, "good", true);
+            ProductReviewDataTable.Rows.Add(16, 8, 1, "good", true);
+            ProductReviewDataTable.Rows.Add(17, 9, 1, "very bad", true);
+            ProductReviewDataTable.Rows.Add(18, 9, 1, "bad", true);
+            ProductReviewDataTable.Rows.Add(19, 10, 2, "good", true);
+            ProductReviewDataTable.Rows.Add(20, 10, 2, "average", true);
+            ProductReviewDataTable.Rows.Add(21, 11, 2, "bad", true);
+            ProductReviewDataTable.Rows.Add(22, 11, 3, "good", true);
+            ProductReviewDataTable.Rows.Add(23, 12, 3, "good", true);
+            ProductReviewDataTable.Rows.Add(24, 12, 3, "average", true);
+            ProductReviewDataTable.Rows.Add(25, 12, 4, "average", true);
 
         }
         /// <summary>
@@ -161,7 +161,15 @@ namespace NUnitTestProject
         public void GivenProductReviewsList_WhenCreatedDataTable_ShouldReturnExpeted()
         {
             DataTable productsReviewDataTable = productReviewManagement.CreateDataTableOfProductReview(ProductsReviewList);
-            Assert.AreEqual(dataTable.Columns[0].ColumnName, productsReviewDataTable.Columns[0].ColumnName);
+            Assert.AreEqual(ProductReviewDataTable.Columns[0].ColumnName, productsReviewDataTable.Columns[0].ColumnName);
+        }
+
+        [Test]
+        public void GivenProductReviewsTable_WhenRetrieveRecordHavingIsLikeTrue_ShouldReturnExpeted()
+        {
+            DataTable dataTable = productReviewManagement.RetrieveRecordWithLikes(ProductReviewDataTable);
+            bool result = (bool)dataTable.Rows[2]["IsLike"];
+            Assert.IsTrue(result);
         }
     }
 }

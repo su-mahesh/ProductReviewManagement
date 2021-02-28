@@ -4,14 +4,13 @@ using System.Data;
 using System.Linq;
 
 namespace Product_Review_Management
-{
+{    
     public class ProductReviewManagement
     {
-        static void Main()
+        readonly List<ProductReview> ProductReviewsList;
+        public ProductReviewManagement()
         {
-            Console.WriteLine("Hello World!");
-
-            List<ProductReview> ProductReviewsList = new List<ProductReview>()
+            ProductReviewsList = new List<ProductReview>()
             {
                 new ProductReview(){ProductID = 1, UserID = 1, Rating = 5, Review = "good", IsLike = true},
                 new ProductReview(){ProductID = 2, UserID = 1, Rating = 5, Review = "good", IsLike = true},
@@ -39,7 +38,9 @@ namespace Product_Review_Management
                 new ProductReview(){ProductID = 24, UserID = 12, Rating = 1, Review = "average", IsLike = true},
                 new ProductReview(){ProductID = 25, UserID = 12, Rating = 1, Review = "average", IsLike = true},
             };
-
+        }
+        public void PrintProductReviewList(List<ProductReview>  ProductReviewsList)
+        {
             foreach (var product in ProductReviewsList)
             {
                 Console.WriteLine("Product ID".PadRight(10) + ":" + product.ProductID);
@@ -49,6 +50,15 @@ namespace Product_Review_Management
                 Console.WriteLine("Liked".PadRight(10) + ":" + product.IsLike);
                 Console.WriteLine();
             }
+        }
+
+        static void Main()
+        {
+            Console.WriteLine("Hello World!");
+
+            
+
+            
         }
         /// <summary>
         /// Retrieves the top3 products by rating.
@@ -114,6 +124,23 @@ namespace Product_Review_Management
             });
 
             return ProductReviewDataTable;
+        }
+
+        public DataTable RetrieveRecordWithLikes(DataTable productReviewDataTable)
+        {
+            DataTable dataTable = new DataTable();
+            dataTable = productReviewDataTable.AsEnumerable().Where(product => product.Field<bool>("IsLike").Equals(true)).CopyToDataTable();//.ToList();
+            return dataTable;
+        }
+        public void PrintDataTable(DataTable dataTable)
+        {
+            foreach (DataRow row in dataTable.Rows)
+            {
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    Console.WriteLine(row[column]);
+                }
+            }
         }
     }
 }
