@@ -36,7 +36,7 @@ namespace NUnitTestProject
                 new ProductReview(){ProductID = 18, UserID = 9, Rating = 1, Review = "good", IsLike = true},
                 new ProductReview(){ProductID = 18, UserID = 9, Rating = 1, Review = "very bad", IsLike = false},
                 new ProductReview(){ProductID = 19, UserID = 10, Rating = 2, Review = "bad", IsLike = true},
-                new ProductReview(){ProductID = 20, UserID = 10, Rating = 2, Review = "good", IsLike = false},
+                new ProductReview(){ProductID = 20, UserID = 10, Rating = 3, Review = "good", IsLike = false},
                 new ProductReview(){ProductID = 21, UserID = 11, Rating = 2, Review = "average", IsLike = true},
                 new ProductReview(){ProductID = 21, UserID = 11, Rating = 3, Review = "bad", IsLike = false},
                 new ProductReview(){ProductID = 25, UserID = 12, Rating = 3, Review = "good", IsLike = true},
@@ -151,7 +151,7 @@ namespace NUnitTestProject
                 new ProductReview(){ProductID = 18, UserID = 9, Rating = 1, Review = "good", IsLike = true},
                 new ProductReview(){ProductID = 18, UserID = 9, Rating = 1, Review = "very bad", IsLike = false},
                 new ProductReview(){ProductID = 19, UserID = 10, Rating = 2, Review = "bad", IsLike = true},
-                new ProductReview(){ProductID = 20, UserID = 10, Rating = 2, Review = "good", IsLike = false},
+                new ProductReview(){ProductID = 20, UserID = 10, Rating = 3, Review = "good", IsLike = false},
                 new ProductReview(){ProductID = 21, UserID = 11, Rating = 2, Review = "average", IsLike = true},
                 new ProductReview(){ProductID = 21, UserID = 11, Rating = 3, Review = "bad", IsLike = false},
                 new ProductReview(){ProductID = 25, UserID = 12, Rating = 3, Review = "good", IsLike = true},
@@ -196,6 +196,17 @@ namespace NUnitTestProject
         {
             List<ProductReview> ProductReviews = productReviewManagement.RetrieveAllProductReviewsHavingReviewNice(ProductsReviewList);
             Assert.AreEqual(ProductsReviewList[10], ProductReviews[0]);
+        }
+        [Test]
+        public void GivenProductReviewsList_WhenRetrieveAllRecordsUserID10OrderByRating_ShouldReturnExpeted()
+        {
+            var expected = new List<ProductReview>()
+            {
+                new ProductReview(){ProductID = 19, UserID = 10, Rating = 2, Review = "bad", IsLike = true},
+                new ProductReview(){ProductID = 20, UserID = 10, Rating = 3, Review = "good", IsLike = false}
+            };            
+            List<ProductReview> result = productReviewManagement.RetrieveAllProductReviewsByUserIDAndOrderByRating(ProductsReviewList, 10);
+            Assert.AreEqual(expected, result);
         }
     }
 }

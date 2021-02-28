@@ -167,5 +167,10 @@ namespace Product_Review_Management
         {
             return productsReviewList.FindAll(product => product.Review.Equals("nice", StringComparison.OrdinalIgnoreCase));
         }
+
+        public List<ProductReview> RetrieveAllProductReviewsByUserIDAndOrderByRating(List<ProductReview> productsReviewList, int userID)
+        {
+            return productsReviewList.FindAll(product => product.UserID.Equals(userID)).OrderBy(product => product.Rating).ToList();
+        }
     }
 }
